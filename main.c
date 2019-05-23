@@ -11,8 +11,8 @@ int main() {
     printf("elemento %d \n", (i + 1));
     scanf("%d",&v[i]);
   }
-  bubble_sort(v, n);
-  printf("\nApós bubble sort!\n");
+  heapsort(v, n);
+  printf("\nApós HEAP sort!\n");
   for (i = 0; i < n; i++) {
     printf("%d\t", v[i]);
   }

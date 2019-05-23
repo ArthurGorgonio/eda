@@ -1,9 +1,8 @@
 # Estrutura de Dados e Algoritmos
 ## Sort Algorithms
-  - [X] Bubble sort;
-  - [X] Counting sort;
-  - [X] Distribution sort;
-  - [ ] Heap sort;
+  - [X] Heap sort;
   - [X] Insertion sort;
   - [X] Merge sort;
+  - [ ] Merge + Insertion;
   - [X] Quick sort;
+  - [ ] Quick + Insertion;

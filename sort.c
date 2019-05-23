@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "sort.h"
-#include "utils.h"
 
 /*
  * ============================================================================
@@ -11,8 +10,8 @@
  *        vector, independent of the length.
  *
  *        Version:  1.1
- *        Created:  2019 Mar 01 20:08
- *    Last Edited:  2019 May 27 17:00
+ *        Created:  2019 Mar 01 20:08 -0300
+ *    Last Edited:  2019 May 27 18:06 -0300
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -21,97 +20,6 @@
  *
  * ============================================================================
  */
-
-/*
- * ===  FUNCTION  =============================================================
- *           Name:  bubble_sort
- *    Description:  This function implements the bubble method for sort all
- *        elements of the vector, comparing two elements and swapping when
- *        necessary.
- *
- *         Params:
- *            *v => An arbitrary vector.
- *             n => The length of vector *v.
- *
- *         Return:  void
- * ============================================================================
-*/
-void bubble_sort(int *v, int n) {
-  int aux, i, j;
-  for(i = 0; i < (n - 1); i++) {
-    for(j = (n - 1); j > i; j--) {
-      if (v[j] < v[j - 1]) {
-        aux = v[j - 1];
-        v[j - 1] = v[j];
-        v[j] = aux;
-      }
-    }
-  }
-}
-
-/*
- * ===  FUNCTION  =============================================================
- *           Name:  counting_sort
- *    Description:  This function implements the counting method for sort all
- *        elements of the vector. It works creating another vector to count the
- *        position of the element in output vector.
- *
- *         Params:
- *            *v => An arbitrary vector.
- *             n => The length of vector *v.
- *
- *         Return:  void
- * ============================================================================
-*/
-void counting_sort(int *v, int n) {
-  int *w;
-  int c, i, j;
-  w = malloc(n * sizeof(int));
-  clear_vector(w, n);
-  for(i = 0; i < n; i++) {
-    c = 0;
-    for(j = 0; j < n; j++) {
-      if(v[i] > v[j]) {
-        c++;
-      }
-    }
-    w[c + 1] = v[i];
-  }
-  for(i = 0; i < n; i++) {
-    v[i] = w[i];
-  }
-  free(w);
-}
-
-/*
- * ===  FUNCTION  =============================================================
- *           Name:  distribution_sort
- *    Description:  Create a auxiliar vector with the range of the elements.
- *        And count the times of the each element repeat.
- *
- *         Params:
- *            *v => An arbitrary vector.
- *            *w => An arbitrary vector.
- *             n => The length of vector *v.
- *           min => The smallest element of vector *v.
- *           max => The higgest element of vector *v.
- *
- *         Return:  void
- * ============================================================================
-*/
-void distribution_sort(int *v, int *w, int n, int min, int m) {
-  int a = 0, i;
-  for(i = 0; i < n; i++) {
-    w[v[i] - min] = w[v[i] - min] + 1;
-  }
-  for(i = 0; i < n; i++) {
-    while(w[i] > 0) {
-      v[a] = i + min;
-      a++;
-      w[i]--;
-    }
-  }
-}
 
 /*
  * ===  FUNCTION  =============================================================
@@ -247,23 +155,6 @@ void quick_sort(int *v, int i, int f) {
     quick_sort(v, i, p - 1);
     quick_sort(v, p + 1, f);
   }
-}
-
-/*
- * ===  FUNCTION  =============================================================
- *           Name:  parent
- *    Description:  This function implements the method to find the parent in
- *        heap sort algorithm.
- *
- *         Params:
- *             i => The index of the element if you want to know your parent.
- *
- *         Return:
- *            Int: The index of the parent of the element.
- * ============================================================================
-*/
-int parent(int i) {
-  return ((int) (i + 1) / 2);
 }
 
 /*
