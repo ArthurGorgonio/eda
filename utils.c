@@ -40,7 +40,7 @@ void clear_vector(int *v, int n) {
 
 /*
  * ===  FUNCTION  =============================================================
- *           Name:  maximun
+ *           Name:  maximus
  *    Description:  Find the highest element of the vector.
  *
  *         Params:

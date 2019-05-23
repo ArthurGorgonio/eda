@@ -12,7 +12,7 @@
  *
  *        Version:  1.1
  *        Created:  2019 Mar 01 20:08
- *    Last Edited:  2019 Mar 03 17:00
+ *    Last Edited:  2019 May 27 17:00
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -246,5 +246,134 @@ void quick_sort(int *v, int i, int f) {
     p = partition (v, i, f);
     quick_sort(v, i, p - 1);
     quick_sort(v, p + 1, f);
+  }
+}
+
+/*
+ * ===  FUNCTION  =============================================================
+ *           Name:  parent
+ *    Description:  This function implements the method to find the parent in
+ *        heap sort algorithm.
+ *
+ *         Params:
+ *             i => The index of the element if you want to know your parent.
+ *
+ *         Return:
+ *            Int: The index of the parent of the element.
+ * ============================================================================
+*/
+int parent(int i) {
+  return ((int) (i + 1) / 2);
+}
+
+/*
+ * ===  FUNCTION  =============================================================
+ *           Name:  left
+ *    Description:  Find the left children of the element.
+ *
+ *         Params:
+ *             i => The index of the element if you want to know your left
+ *        children.
+ *
+ *         Return:
+ *            Int: The index of the left children.
+ * ============================================================================
+*/
+int left(int i) {
+  return (2 * i + 1);
+}
+
+/*
+ * ===  FUNCTION  =============================================================
+ *           Name:  right
+ *    Description:  Find the right children of the element.
+ *
+ *         Params:
+ *             i => The index of the element if you want to know your right
+ *        children.
+ *
+ *         Return:
+ *            Int: The index of the right children.
+ * ============================================================================
+*/
+int right(int i) {
+  return (2 * i + 2);
+}
+
+/*
+ * ===  FUNCTION  =============================================================
+ *           Name:  max_heapify
+ *    Description:  This function maintain the max-heap property, the parent >
+ *    your children.
+ *
+ *         Params:
+ *            *v => An arbitrary vector.
+ *             n => The length of the vector *v.
+ *             i => The element would be adjusted.
+ *
+ *         Return: void
+ * ============================================================================
+*/
+void max_heapify(int *v, int n, int i) {
+  int l, largest, r, aux;
+  l = left(i);
+  r = right(i);
+  if ((l <= (n - 1)) && (v[l] > v[i])) {
+    largest = l;
+  } else {
+    largest = i;
+  }
+  if ((r <= (n - 1)) && (v[r] > v[largest])) {
+    largest = r;
+  }
+  if (largest != i) {
+    aux = v[i];
+    v[i] = v[largest];
+    v[largest] = aux;
+    max_heapify(v, n, largest);
+  }
+}
+
+/*
+ * ===  FUNCTION  =============================================================
+ *           Name:  build_max_heap
+ *    Description:  Auxiliar function to heapsort algorithm, this build a max
+ *        heap.
+ *
+ *         Params:
+ *            *v => An arbitrary vector.
+ *             n => The length of the vector *v.
+ *
+ *         Return: void
+ * ============================================================================
+*/
+void build_max_heap(int *v, int n) {
+  int i;
+  for (i = (int) ((n - 1) / 2); i >= 0; i--) {
+    max_heapify(v, n, i);
+  }
+}
+
+/*
+ * ===  FUNCTION  =============================================================
+ *           Name:  heapsort
+ *    Description:  The heapsort algorithm only the core.
+ *
+ *         Params:
+ *            *v => An arbitrary vector.
+ *             n => The length of the vector *v.
+ *
+ *         Return: void
+ * ============================================================================
+*/
+void heapsort(int *v, int n) {
+  int i, aux;
+  build_max_heap(v, n);
+  for (i = (n - 1); i >= 1; i--) {
+    n--;
+    aux = v[0];
+    v[0] = v[i];
+    v[i] = aux;
+    max_heapify(v, n, 0);
   }
 }
